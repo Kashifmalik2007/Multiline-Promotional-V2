@@ -1,0 +1,37 @@
+# Render Blueprint (optional).
+#
+# You do NOT need this file to deploy — the manual steps in
+# DEPLOYMENT_GUIDE.md work fine via the Render dashboard. This file just
+# lets you reproduce the same setup as code ("New + > Blueprint" in Render,
+# pointing at this repo) instead of clicking through the UI.
+services:
+  - type: web
+    name: multiline-promotional-v2
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Paste your Railway MySQL connection string here via the Render
+      # dashboard (Environment tab) instead of committing it to git.
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_SSL
+        value: "false"
+      - key: ALLOWED_ORIGIN
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: UPLOAD_BASE_URL
+        sync: false
+    disk:
+      # Render's filesystem is ephemeral on every deploy/restart — without
+      # this disk, admin-uploaded product images disappear on the next
+      # deploy. Requires a paid Render plan (persistent disks aren't
+      # available on the free tier).
+      name: uploads
+      mountPath: /var/data/uploads
+      sizeGB: 1

@@ -1,0 +1,6 @@
+{
+  "name": "Multiline Promotional",
+  "description": "Premium corporate and promotional giveaways, custom trophies, apparel, and branding solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
