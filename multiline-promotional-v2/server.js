@@ -49,8 +49,12 @@ if (!process.env.DB_PASSWORD && !process.env.DATABASE_URL && !process.env.MYSQL_
 // require it (Railway's public proxy endpoint does; its private network
 // endpoint usually doesn't).
 const connectionString = process.env.DATABASE_URL || process.env.MYSQL_URL;
-const sslConfig = process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : undefined;
-
+const sslConfig =
+  process.env.DB_SSL === "true"
+    ? {
+        rejectUnauthorized: false,
+      }
+    : undefined;
 const pool = connectionString
   ? mysql.createPool({
       uri: connectionString,
