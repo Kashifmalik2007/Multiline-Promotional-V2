@@ -62,21 +62,24 @@ const pool = connectionString
       connectionLimit: 10,
       queueLimit: 0,
       charset: "utf8mb4",
-      ssl: sslConfig,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     })
   : mysql.createPool({
-      host: process.env.DB_HOST || "127.0.0.1",
-      port: Number(process.env.DB_PORT || 3306),
+      host: process.env.DB_HOST || "sakura.proxy.rlwy.net",
+      port: Number(process.env.DB_PORT || 59768),
       user: process.env.DB_USER || "root",
       password: process.env.DB_PASSWORD || "",
-      database: process.env.DB_NAME || "multiline_promotional",
+      database: process.env.DB_NAME || "railway",
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
       charset: "utf8mb4",
-      ssl: sslConfig,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
-
 // Verify DB connectivity at boot. This is intentionally NON-FATAL — the
 // HTTP server still starts and serves the frontend even if MySQL is
 // temporarily unreachable, so the whole app doesn't "exit early" over a
