@@ -48,13 +48,18 @@ if (!process.env.DB_PASSWORD && !process.env.DATABASE_URL && !process.env.MYSQL_
 // from the Railway dashboard. DB_SSL=true enables TLS for hosts that
 // require it (Railway's public proxy endpoint does; its private network
 // endpoint usually doesn't).
-const connectionString = process.env.DATABASE_URL || process.env.MYSQL_URL;
+const connectionString =
+  process.env.DATABASE_URL ||
+  process.env.MYSQL_URL ||
+  process.env.MYSQL_PUBLIC_URL;
+
 const sslConfig =
   process.env.DB_SSL === "true"
     ? {
         rejectUnauthorized: false,
       }
     : undefined;
+
 const pool = connectionString
   ? mysql.createPool({
       uri: connectionString,
@@ -62,23 +67,19 @@ const pool = connectionString
       connectionLimit: 10,
       queueLimit: 0,
       charset: "utf8mb4",
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: sslConfig,
     })
   : mysql.createPool({
-      host: process.env.DB_HOST || "sakura.proxy.rlwy.net",
+      host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT || 3306),
       user: process.env.DB_USER || "root",
       password: process.env.DB_PASSWORD || "Kashifmalik@2007",
-      database: process.env.DB_NAME || "multiline_promotional",
+      database: process.env.DB_NAME || "railway",
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
       charset: "utf8mb4",
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: sslConfig,
     });
 // Verify DB connectivity at boot. This is intentionally NON-FATAL — the
 // HTTP server still starts and serves the frontend even if MySQL is
