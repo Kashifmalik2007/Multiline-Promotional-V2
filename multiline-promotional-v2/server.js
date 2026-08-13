@@ -81,17 +81,17 @@ const pool = connectionString
       charset: "utf8mb4",
       ssl: sslConfig,
     });
-{
-  "MYSQL_DATABASE": "railway",
-  "MYSQL_PUBLIC_URL": "mysql://${{MYSQLUSER}}:${{MYSQLPASSWORD}}@${{RAILWAY_TCP_PROXY_DOMAIN}}:${{RAILWAY_TCP_PROXY_PORT}}/${{MYSQLDATABASE}}",
-  "MYSQL_ROOT_PASSWORD": "GzNmtEBnMxlrbuqlGLAkdglMbCaPZmmP",
-  "MYSQL_URL": "mysql://${{MYSQLUSER}}:${{MYSQL_ROOT_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:3306/${{MYSQL_DATABASE}}",
-  "MYSQLDATABASE": "${{MYSQL_DATABASE}}",
-  "MYSQLHOST": "${{RAILWAY_PRIVATE_DOMAIN}}",
-  "MYSQLPASSWORD": "Kashifmalik@2007",
-  "MYSQLPORT": "3306",
-  "MYSQLUSER": "root"
-}
+// {
+//   "MYSQL_DATABASE": "railway",
+//   "MYSQL_PUBLIC_URL": "mysql://${{MYSQLUSER}}:${{MYSQLPASSWORD}}@${{RAILWAY_TCP_PROXY_DOMAIN}}:${{RAILWAY_TCP_PROXY_PORT}}/${{MYSQLDATABASE}}",
+//   "MYSQL_ROOT_PASSWORD": "GzNmtEBnMxlrbuqlGLAkdglMbCaPZmmP",
+//   "MYSQL_URL": "mysql://${{MYSQLUSER}}:${{MYSQL_ROOT_PASSWORD}}@${{RAILWAY_PRIVATE_DOMAIN}}:3306/${{MYSQL_DATABASE}}",
+//   "MYSQLDATABASE": "${{MYSQL_DATABASE}}",
+//   "MYSQLHOST": "${{RAILWAY_PRIVATE_DOMAIN}}",
+//   "MYSQLPASSWORD": "Kashifmalik@2007",
+//   "MYSQLPORT": "3306",
+//   "MYSQLUSER": "root"
+// }
 // Verify DB connectivity at boot. This is intentionally NON-FATAL — the
 // HTTP server still starts and serves the frontend even if MySQL is
 // temporarily unreachable, so the whole app doesn't "exit early" over a
